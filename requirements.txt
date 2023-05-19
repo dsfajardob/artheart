@@ -1,0 +1,4 @@
+Flask==2.3.2
+gradio_client==0.2.5
+jupyter==1.0.0
+jupyterlab==4.0.0

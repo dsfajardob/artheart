@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>artheart.ai technical test</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="brand"><a href="#">ArtHeat.Ai technical test</a></div>
+    </header>
+
+<p><h1 align="center">artheart.ai technical test</h1></p>
+<div class="container">
+<div class="row">
+    <h2>Select a image to upload</h2>
+    <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+            <label for="avatar">Choose a picture:</label>
+            <p>
+                <input type="file" name="file" class="form-control" autocomplete="off" placeholder="Image" required>
+            </p>
+            <label for="avatar">Choose an audio file:</label>
+            <p>
+                <input type="file" name="audio" class="form-control" autocomplete="off" required>
+            </p>
+            <label for="avatar">Still Mode (fewer hand motion, works with preprocess `full`)</label>
+            <p>
+                <input type="checkbox" name="still" class="form-control" autocomplete="off">
+            </p>
+            <label for="avatar">GFPGAN as Face enhancer</label>
+            <p>
+                <input type="checkbox" name="enhancer" class="form-control" autocomplete="off">
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Submit" class="btn btn-info">
+        </p>
+    </form>
+    <div class="grid-container">
+
+        <div class="grid-child purple">
+            {% if filename %}
+            <div class="grid-child">
+                <img src="{{ url_for('display_file', filename=filename) }}">
+            </div>
+            {% endif %}
+        </div>
+    
+        <div class="grid-child green">
+            {% if videoname %}
+            <div class="grid-child">
+                <video controls>
+                    <source src="{{ url_for('display_file', filename=videoname) }}" type="video/mp4">
+                </video>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+</div>
+</body>
+</html>
