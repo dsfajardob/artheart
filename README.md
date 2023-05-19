@@ -1,10 +1,11 @@
-# ArtHeart.ai Techinical  test implementation process
+# ArtHeart.ai Technical test implementation process
 
 David Santiago Fajardo Barrera <br>
-Senior Machine Lerning Engineer
+Senior Machine Learning Engineer
 
-# 1. Create a virutal environment to work with
-You can use the virtual env tool that fits you the most, In this case I'm using conda
+
+# 1.  Create a virtual environment to work with
+You can use the virtual env tool that fits you the most, In this case I'm using condaa
 
  ```bash
   conda create -n ArtHearDemo python=3.8
@@ -26,7 +27,7 @@ You can use the virtual env tool that fits you the most, In this case I'm using 
 ```
 
 # 3. Set up the SalTaker code base, for this you could follow the installation instruccion posted in the repo's README <br>
-In order to Simplify the process I also post the instruccions in here <br>
+In order to Simplify the process I also post the instructions in here <br>
 This steps are simplified in order that you already created a virtual env and you working using it
 
 ### Linux:
@@ -59,7 +60,7 @@ This steps are simplified in order that you already created a virtual env and yo
 
 ### Macbook:
 
-More tips about installnation on Macbook and the Docker file can be founded [here](docs/install.md)
+More tips about installation  on Macbook and the Docker file can be founded [here](docs/install.md)
 
 # 4. Once you have all the base code setted up you must download the trained Models
 
@@ -88,9 +89,9 @@ bash scripts/download_models.sh
 
 If this commands fails to you due to any reason you can also download the models by hand:
 1. Go to the releases [page](https://github.com/OpenTalker/SadTalker/releases)
-2. Look for the assests and download all of them
+2. Look for the assets and download all of them
 3. Create a folder in your SalTalker folder and name it  **checkpoints**
-4. Paste all your dowloaded assets inside the new **checkpoints** folder
+4. Paste all yourdownloaded d assets inside the new **checkpoints** folder
 5. The .zip files should be unzipped in the same folder
 6. That's it! Now you can use the models and run the demo
 
@@ -100,6 +101,7 @@ We will be using the gradio service as an API, to make it possible we need to en
 
 1. Open the app.py in the gradio root folder using your favorite IDE or text editor
 2. Go to line 131, here you can see the initialization for the 'on_click' or 'click' behavior that it's used in the submit button, you should look some code like this
+
 ```python
 submit.click(
     fn=sad_talker.test,
@@ -112,7 +114,7 @@ submit.click(
     )
 ```
    
-4. add the ```python api_name="predict"``` to the end of the initialization, afther the outputs param (Dont forget the ',' comma), you should end with something like: 
+4. add the ```python api_name="predict"```  to the end of the initialization, after the outputs param (Don't forget the ',' comma), you should end with something like:
 
 ```python
 submit.click(
@@ -135,22 +137,24 @@ python app.py
 
 Run this command in a console with your environment activated this will create a new service listening using a gradio api that will be used in the front demo
 
-# 7. Run the app.py in the DemoFront root folder
+# 7.Run the app.py in the DemoFront root folder
 
-once you have your gradio service running it's time to use the backend and front end interface to serve the model outputs. <br>
+Once you have your gradio service running it's time to use the backend and front end interface to serve the model outputs.
 For this you probably will need a new console with your virtual environment activated
 ```bash
   cd DemoFront
 
   python app.py
 ```
-This will move you just in the DemoFront folder and after that will run a flask service that will be used as interfacte to serve the model outputs
+This will move you just in the DemoFront folder and after that will run a flask service that will be used as interface to serve the model outputs
 
 # Three ways of how would you improve this?
 
-1. No use the gradio backend API, instead create a full backend to serve the model output: Right now we have to services, one for the front and another one for the back, even the front service has a lot of improvement in terms of architecture  it's enought in order to have all running. But having a full backed service that could be fully in charge of the model serving will give us more control about what we can do with the model output and the inputs we will be sended to the model, also can help us to think on the data infraestructure and architecture because right now we are just storing images and audio whitout any context.
-2. have a database: with a data base we can store the payloads sended to the model, also more information about users that could be use latter for BI or stronger analysis in how to improve the product.
-4. Use hugging face workspace to use the models from there: Right now we are using a model in the local machine, this model uses a gpu in case of having one available or the CPU this is very expensive, we can use a tool like hugging face to check for another models that acutally do the same thing less expensive or use the workspace they provide as main computational hub for the inference endpoints 
+1. No use the gradio backend API, instead create a full backend to serve the model output: Right now we have two services, one for the front and another one for the back, even the front service has a lot of improvement in terms of architecture it's enough in order to have all running. But having a full backed service that could be fully in charge of the model serving will give us more control about what we can do with the model output and the inputs we will be sended to the model, also can help us to think on the data infrastructure and architecture because right now we are just storing images and audio without any context.t2. have a database: with a database we can store the payloads sended to the model, also more information about users that could be used as a ladder for BI or stronger analysis in how to improve the product. 3. Use hugging face workspace to use the models from there: Right now we are using a model in the local machine, this model uses a gpu in case of having one available or the CPU this is very expensive, we can use a tool like hugging face to check for another models that actually do the same thing less expensive or use the workspace they provide as main computational hub for the inference endpointsce endpoints 
+
+# Architecture Diagram
+
+![K8s Architecture Based](img/architecture.jpg "Architecture")
 
 
 ```python
